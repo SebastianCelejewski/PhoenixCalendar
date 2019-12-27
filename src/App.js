@@ -1,12 +1,12 @@
 import React from 'react';
 import './App.css';
-import Day from './Day.js';
+import Calendar from './Calendar.js';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      calendar: [
+      days: [
         {
           dayOfWeek: 'Monday',
           date: '2019-12-11',
@@ -35,16 +35,11 @@ class App extends React.Component {
     }
   }
 
-  renderDay(day) {
-    return (<Day dayOfWeek={day.dayOfWeek} date={day.date} events={day.events}/>);
-  }
-
   render() {
-    const days = this.state.calendar.map( (day) => this.renderDay(day) );
     return (
       <div className="App">
         <header className="App-header">Phoenix Calendar</header>
-        {days}
+        <Calendar days={this.state.days}/>
       </div>
     );
   }
