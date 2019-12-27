@@ -1,0 +1,28 @@
+.day {
+	padding: 1px;
+	margin: 1px;
+	clear: both;
+	text-align: left;
+}
+
+.dayHeader {
+	margin-top: 4px;
+	background-color: #e0e0e0;
+	display: inline-block;
+	vertical-align: top;
+}
+
+.dayOfWeek {
+	font-weight: bold;
+	margin: 0;
+}
+
+.date {
+	margin: 0;
+}
+
+.dayContents {
+	padding: 0;
+	margin-left: 2px;
+	display: inline-block;
+}
