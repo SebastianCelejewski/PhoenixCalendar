@@ -9,7 +9,7 @@ class Calendar extends React.Component {
   }
 
   render() {
-    return this.props.days.map( (day) => this.renderDay(day) );
+    return this.props.calendar.map( (day) => this.renderDay(day) );
   }
 }
 
