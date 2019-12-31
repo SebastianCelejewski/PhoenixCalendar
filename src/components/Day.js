@@ -9,7 +9,6 @@ class Day extends React.Component {
 	}
 
 	onEventDescriptionChanged(key, eventDescription) {
-		console.log("Day knows that event " + key + " description changed to: " + eventDescription)
 		this.props.onEventDescriptionChanged(this.props.date, key, eventDescription);
 	}
 

@@ -9,7 +9,6 @@ class Calendar extends React.Component {
   }
 
   onEventDescriptionChanged(date, eventIdx, eventDescription) {
-  	console.log("Calendar knows that date: " + date + ", eventIdx: " + eventIdx + ", description: " + eventDescription);
   	this.props.onEventDescriptionChanged(date, eventIdx, eventDescription);
   }
 

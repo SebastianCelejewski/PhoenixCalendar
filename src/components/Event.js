@@ -12,23 +12,19 @@ class Event extends React.Component {
   }
 
   enterEditMode() {
-  	console.log("Entering edit mode")
   	this.setState( state => ({ mode: 'edit'	}));
   }
 
   acceptChange() {
-  	console.log("Accepting change");
   	this.setState( state => ({mode: 'view'}));
   	this.props.onEventDescriptionChanged(this.props.event_idx, this.state.description);
   }
 
   rejectChange() {
-  	console.log("Rejecting change");
   	this.setState( state => ({mode: 'view', description: this.props.description}));
   }
 
   onChange(event) {
-  	console.log("onChange("+event.target+")")
   	this.setState({ description: event.target.value})
   }
 

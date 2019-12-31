@@ -40,8 +40,20 @@ const initialCalendar = [
 function calendar(state = initialCalendar, action) {
   switch (action.type) {
     case EDIT_EVENT_DESCRIPTION:
-      console.log("Event: EDIT EVENT, date: " + action.date + ", eventIdx: " + action.eventIdx + ", description: " + action.eventDescription)
-      return state
+      var newState = state.map((day) => {
+        if (day.date === action.date) {
+          return Object.assign({}, day, day.events.map((event, idx) => {
+            if (idx === action.eventIdx) {
+              return action.eventDescription
+            }
+            return event
+          }))
+        } else {
+          return day
+        }
+      })
+
+      return newState
   	default:
   	  return state
   }
