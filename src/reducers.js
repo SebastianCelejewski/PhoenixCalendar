@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux'
+import { EDIT_EVENT_DESCRIPTION } from './actions'
 
 const initialCalendar = [
         {
@@ -38,6 +39,9 @@ const initialCalendar = [
 
 function calendar(state = initialCalendar, action) {
   switch (action.type) {
+    case EDIT_EVENT_DESCRIPTION:
+      console.log("Event: EDIT EVENT, date: " + action.date + ", eventIdx: " + action.eventIdx + ", description: " + action.eventDescription)
+      return state
   	default:
   	  return state
   }

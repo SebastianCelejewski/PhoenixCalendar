@@ -3,9 +3,18 @@ import './Calendar.css';
 import Day from './Day.js';
 
 class Calendar extends React.Component {
+  constructor(props) {
+  	super(props);
+  	this.onEventDescriptionChanged = this.onEventDescriptionChanged.bind(this);
+  }
+
+  onEventDescriptionChanged(date, eventIdx, eventDescription) {
+  	console.log("Calendar knows that date: " + date + ", eventIdx: " + eventIdx + ", description: " + eventDescription);
+  	this.props.onEventDescriptionChanged(date, eventIdx, eventDescription);
+  }
 
   renderDay(day) {
-    return (<Day dayOfWeek={day.dayOfWeek} date={day.date} events={day.events}/>);
+    return (<Day key={day.date} dayOfWeek={day.dayOfWeek} date={day.date} events={day.events} onEventDescriptionChanged={this.onEventDescriptionChanged}/>);
   }
 
   render() {

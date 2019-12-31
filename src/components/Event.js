@@ -19,6 +19,7 @@ class Event extends React.Component {
   acceptChange() {
   	console.log("Accepting change");
   	this.setState( state => ({mode: 'view'}));
+  	this.props.onEventDescriptionChanged(this.props.event_idx, this.state.description);
   }
 
   rejectChange() {
