@@ -5,12 +5,12 @@ import Event from './Event.js';
 function Day(props) {
 	var events = props.events.map( (event) => <Event description={event}/>);
 	return (
-		<div class="day">
-			<div class="dayHeader">
-				<p class="dayOfWeek">{props.dayOfWeek}</p>
-				<p class="date">{props.date}</p>
+		<div className="day">
+			<div className="dayHeader">
+				<p className="dayOfWeek">{props.dayOfWeek}</p>
+				<p className="date">{props.date}</p>
 			</div>
-			<div class="dayContents">
+			<div className="dayContents">
 				{events}
 			</div>
 		</div>
