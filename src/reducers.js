@@ -25,26 +25,18 @@ const initialCalendar = [
             "Event 5.",
             "Event 6."
           ]
-        },
-        {
-          dayOfWeek: 'Thursday',
-          date: '2019-12-14',
-          events: [
-            "Aliquam quis elementum sem, ac blandit libero. Quisque malesuada auctor metus, id mattis dui venenatis eu.",
-            "Curabitur scelerisque, lectus non ullamcorper laoreet, nisl metus maximus odio, vitae suscipit massa orci quis nibh."
-          ]
         }
       ]
 
 function editEventDescription(action, state) {
   var newState = state.map((day) => {
     if (day.date === action.date) {
-      return Object.assign({}, day, day.events.map((event, idx) => {
+      return Object.assign({}, day, {events: day.events.map((event, idx) => {
         if (idx === action.eventIdx) {
           return action.eventDescription
         }
         return event
-      }))
+      })})
     } else {
       return day
     }
@@ -64,7 +56,7 @@ function moveEventUp(action, state) {
         dayEvents[movedEventIdx-1] = dayEvents[movedEventIdx]
         dayEvents[movedEventIdx] = tempEvent
       }
-      return Object.assign({}, day, dayEvents)
+      return Object.assign({}, day, {events: dayEvents})
     } else {
       return day
     }
