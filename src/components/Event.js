@@ -9,10 +9,25 @@ class Event extends React.Component {
     this.acceptChange = this.acceptChange.bind(this);
     this.rejectChange = this.rejectChange.bind(this);
     this.onChange = this.onChange.bind(this);
+    this.moveEventUp = this.moveEventUp.bind(this);
+    this.moveEventDown = this.moveEventDown.bind(this);
+    this.deleteEvent = this.deleteEvent.bind(this);
   }
 
   enterEditMode() {
     this.setState( state => ({ mode: 'edit' }));
+  }
+
+  moveEventUp() {
+    this.props.onEventMovedUp(this.props.eventIdx);
+  }
+
+  moveEventDown() {
+    this.props.onEventMovedDown(this.props.eventIdx);
+  }
+
+  deleteEvent() {
+    this.props.onEventDeleted(this.props.eventIdx);
   }
 
   acceptChange() {
@@ -39,8 +54,13 @@ class Event extends React.Component {
 
   renderViewMode() {
     return (
-      <div className="event" onClick={this.enterEditMode}>
-        {this.state.description}
+      <div className="event" >
+        <span onClick={this.enterEditMode}>{this.state.description}</span>
+        <span className="eventControls">
+          <button onClick={this.moveEventUp}>&uarr;</button>
+          <button onClick={this.moveEventDown}>&darr;</button>
+          <button onClick={this.deleteEvent}>X</button>
+        </span>
       </div>
     );
   }

@@ -2,6 +2,14 @@
 	text-align: left;
 }
 
+.eventControls {
+  margin-left: 5px;
+}
+
+.eventControls button {
+  margin-left: 2px;
+}
+
 p, textarea {
 	margin:0;
 }

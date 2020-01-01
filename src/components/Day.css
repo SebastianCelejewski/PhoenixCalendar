@@ -7,9 +7,13 @@
 
 .dayHeader {
 	margin-top: 4px;
+	margin-right: 4px;
+	padding-left: 4px;
+	padding-right: 4px;
 	background-color: #e0e0e0;
 	display: inline-block;
 	vertical-align: top;
+	text-align: right;
 }
 
 .dayOfWeek {

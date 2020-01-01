@@ -6,10 +6,25 @@ class Day extends React.Component {
   constructor(props) {
     super(props);
     this.onEventDescriptionChanged = this.onEventDescriptionChanged.bind(this);
+    this.onEventMovedUp = this.onEventMovedUp.bind(this);
+    this.onEventMovedDown = this.onEventMovedDown.bind(this);
+    this.onEventDeleted = this.onEventDeleted.bind(this);
   }
 
-  onEventDescriptionChanged(key, eventDescription) {
-    this.props.onEventDescriptionChanged(this.props.date, key, eventDescription);
+  onEventDescriptionChanged(eventIdx, eventDescription) {
+    this.props.onEventDescriptionChanged(this.props.date, eventIdx, eventDescription);
+  }
+
+  onEventMovedUp(eventIdx) {
+  	this.props.onEventMovedUp(this.props.date, eventIdx);
+  }
+
+  onEventMovedDown(eventIdx) {
+  	this.props.onEventMovedDown(this.props.date, eventIdx);
+  }
+
+  onEventDeleted(eventIdx) {
+  	this.props.onEventDeleted(this.props.date, eventIdx);
   }
 
   renderEvent(event, idx) {
@@ -19,6 +34,9 @@ class Day extends React.Component {
         eventIdx={idx}
         description={event}
         onEventDescriptionChanged={this.onEventDescriptionChanged}
+        onEventMovedUp={this.onEventMovedUp}
+        onEventMovedDown={this.onEventMovedDown}
+        onEventDeleted={this.onEventDeleted}
       />
     );
   }
