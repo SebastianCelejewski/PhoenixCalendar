@@ -6,6 +6,7 @@ const App = () => (
   <div className="App">
     <header className="App-header">Phoenix Calendar</header>
     <VisibleCalendar/>
+    <VisibleCalendar/>
   </div>
 )
 

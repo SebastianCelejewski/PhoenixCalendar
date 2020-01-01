@@ -54,7 +54,7 @@ class Event extends React.Component {
   renderViewMode() {
     return (
       <div className="event" >
-        <span onClick={this.enterEditMode}>{this.state.description}</span>
+        <span onClick={this.enterEditMode}>{this.props.description}</span>
         <span className="eventControls">
           <button onClick={this.moveEventUp}>&uarr;</button>
           <button onClick={this.moveEventDown}>&darr;</button>

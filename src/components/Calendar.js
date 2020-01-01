@@ -28,7 +28,6 @@ class Calendar extends React.Component {
   }
 
   renderDay(day) {
-    console.log("Calendar renders day " + day.date + " and props are: " + JSON.stringify(day))
     return (<Day
       key={day.date}
       dayOfWeek={day.dayOfWeek}
@@ -42,7 +41,6 @@ class Calendar extends React.Component {
   }
 
   render() {
-    console.log("Calendar props are: " + JSON.stringify(this.props));
     return this.props.calendar.map( (day) => this.renderDay(day) );
   }
 }
