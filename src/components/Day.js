@@ -42,7 +42,6 @@ class Day extends React.Component {
   }
 
   render() {
-    console.log("Day.render, date: " + this.props.date);
     var events = this.props.events.map( (event, idx) => this.renderEvent(event, idx));
     return (
       <div className="day">

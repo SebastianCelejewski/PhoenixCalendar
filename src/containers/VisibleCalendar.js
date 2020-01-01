@@ -3,8 +3,6 @@ import { editEventDescription, moveEventUp, moveEventDown, deleteEvent } from '.
 import Calendar from '../components/Calendar'
 
 const mapStateToProps = state => {
-  console.log("Mapping state to props:");
-  console.log(JSON.stringify(state));
   return {
     calendar: state.calendar
   }

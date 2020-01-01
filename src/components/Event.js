@@ -44,7 +44,6 @@ class Event extends React.Component {
   }
 
   render() {
-    console.log("Event.render, eventIdx: " + this.props.eventIdx);
     if (this.state.mode === 'view') {
       return this.renderViewMode();
     } else {
