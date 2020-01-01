@@ -1,53 +1,49 @@
-import React from 'react';
-import './Event.css';
+import React from 'react'
+import './Event.css'
+import EditEvent from './EditEvent.js'
 
 class Event extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = { mode: 'view', description: props.description }
-    this.enterEditMode = this.enterEditMode.bind(this);
-    this.acceptChange = this.acceptChange.bind(this);
-    this.rejectChange = this.rejectChange.bind(this);
-    this.onChange = this.onChange.bind(this);
-    this.moveEventUp = this.moveEventUp.bind(this);
-    this.moveEventDown = this.moveEventDown.bind(this);
-    this.deleteEvent = this.deleteEvent.bind(this);
+    this.enterEditMode = this.enterEditMode.bind(this)
+    this.acceptChange = this.acceptChange.bind(this)
+    this.rejectChange = this.rejectChange.bind(this)
+    this.moveEventUp = this.moveEventUp.bind(this)
+    this.moveEventDown = this.moveEventDown.bind(this)
+    this.deleteEvent = this.deleteEvent.bind(this)
   }
 
   enterEditMode() {
-    this.setState( state => ({ mode: 'edit' }));
+    this.setState( state => ({ mode: 'edit' }))
   }
 
   moveEventUp() {
-    this.props.onEventMovedUp(this.props.eventIdx);
+    this.props.onEventMovedUp(this.props.eventIdx)
   }
 
   moveEventDown() {
-    this.props.onEventMovedDown(this.props.eventIdx);
+    this.props.onEventMovedDown(this.props.eventIdx)
   }
 
   deleteEvent() {
-    this.props.onEventDeleted(this.props.eventIdx);
+    this.props.onEventDeleted(this.props.eventIdx)
   }
 
-  acceptChange() {
-    this.props.onEventDescriptionChanged(this.props.eventIdx, this.state.description);
-    this.setState( state => ({mode: 'view'}));
+  acceptChange(text) {
+    this.props.onEventDescriptionChanged(this.props.eventIdx, text);
+    this.setState( state => ({mode: 'view'}))
   }
 
   rejectChange() {
     this.setState( state => ({mode: 'view', description: this.props.description}));
   }
 
-  onChange(event) {
-    this.setState({ description: event.target.value})
-  }
-
   render() {
     if (this.state.mode === 'view') {
-      return this.renderViewMode();
+      return this.renderViewMode()
     } else {
-      return this.renderEditMode();
+      return this.renderEditMode()
     }
   }
 
@@ -66,13 +62,9 @@ class Event extends React.Component {
 
   renderEditMode() {
     return (
-      <div className="event" >
-        <textarea autoFocus value={this.state.description} onChange={this.onChange} cols="80" rows="5"/>
-        <p><button onClick={this.acceptChange}>Accept</button>
-        <button onClick={this.rejectChange}>Reject</button></p>
-      </div>
-    );
+      <EditEvent text={this.state.description} onAccepted={this.acceptChange} onCancelled={this.rejectChange}/>
+    )
   }
 }
 
-export default Event;
+export default Event
