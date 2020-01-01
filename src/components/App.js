@@ -5,7 +5,7 @@ import VisibleCalendar from '../containers/VisibleCalendar.js';
 const App = () => (
   <div className="App">
     <header className="App-header">Phoenix Calendar</header>
-    <VisibleCalendar/>
+    <VisibleCalendar id="1"/>
   </div>
 )
 

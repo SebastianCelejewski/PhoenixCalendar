@@ -3,6 +3,8 @@ import { editEventDescription } from '../actions'
 import Calendar from '../components/Calendar'
 
 const mapStateToProps = state => {
+  console.log("Mapping state to props:");
+  console.log(JSON.stringify(state));
   return {
     calendar: state.calendar
   }
@@ -10,7 +12,9 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-  	onEventDescriptionChanged: (date, eventIdx, eventDescription) => { dispatch(editEventDescription(date, eventIdx, eventDescription))}
+  	onEventDescriptionChanged: (date, eventIdx, eventDescription) => {
+  	  dispatch(editEventDescription(date, eventIdx, eventDescription))
+  	}
   }
 }
 

@@ -17,6 +17,8 @@ class Calendar extends React.Component {
   }
 
   render() {
+  	console.log("Calendar.render, instanceId: " + this.props.id);
+    console.log("My state is: " + JSON.stringify(this.props));
     return this.props.calendar.map( (day) => this.renderDay(day) );
   }
 }

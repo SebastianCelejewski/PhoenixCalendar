@@ -38,6 +38,7 @@ const initialCalendar = [
       ]
 
 function calendar(state = initialCalendar, action) {
+  console.log("Handling event " + action.type)
   switch (action.type) {
     case EDIT_EVENT_DESCRIPTION:
       var newState = state.map((day) => {

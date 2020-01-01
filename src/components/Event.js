@@ -3,47 +3,56 @@ import './Event.css';
 
 class Event extends React.Component {
   constructor(props) {
-  	super(props);
-  	this.state = { mode: 'view', description: props.description }
-  	this.enterEditMode = this.enterEditMode.bind(this);
-  	this.acceptChange = this.acceptChange.bind(this);
-  	this.rejectChange = this.rejectChange.bind(this);
-  	this.onChange = this.onChange.bind(this);
+    super(props);
+    this.state = { mode: 'view', description: props.description }
+    this.enterEditMode = this.enterEditMode.bind(this);
+    this.acceptChange = this.acceptChange.bind(this);
+    this.rejectChange = this.rejectChange.bind(this);
+    this.onChange = this.onChange.bind(this);
   }
 
   enterEditMode() {
-  	this.setState( state => ({ mode: 'edit'	}));
+    this.setState( state => ({ mode: 'edit' }));
   }
 
   acceptChange() {
-  	this.setState( state => ({mode: 'view'}));
-  	this.props.onEventDescriptionChanged(this.props.event_idx, this.state.description);
+    this.setState( state => ({mode: 'view'}));
+    this.props.onEventDescriptionChanged(this.props.eventIdx, this.state.description);
   }
 
   rejectChange() {
-  	this.setState( state => ({mode: 'view', description: this.props.description}));
+    this.setState( state => ({mode: 'view', description: this.props.description}));
   }
 
   onChange(event) {
-  	this.setState({ description: event.target.value})
+    this.setState({ description: event.target.value})
   }
 
   render() {
+    console.log("Event.render, eventIdx: " + this.props.eventIdx);
     if (this.state.mode === 'view') {
-      return (
-        <div className="event" onClick={this.enterEditMode}>
-          {this.state.description}
-        </div>
-	  );
-	} else {
-	  return (
-	  	<div className="event" >
-          <textarea autoFocus value={this.state.description} onChange={this.onChange} cols="80" rows="5"/>
-          <p><button onClick={this.acceptChange}>Accept</button>
-          <button onClick={this.rejectChange}>Reject</button></p>
-	  	</div>
-	  );
-	}
+      return this.renderViewMode();
+    } else {
+      return this.renderEditMode();
+    }
+  }
+
+  renderViewMode() {
+    return (
+      <div className="event" onClick={this.enterEditMode}>
+        {this.state.description}
+      </div>
+    );
+  }
+
+  renderEditMode() {
+    return (
+      <div className="event" >
+        <textarea autoFocus value={this.state.description} onChange={this.onChange} cols="80" rows="5"/>
+        <p><button onClick={this.acceptChange}>Accept</button>
+        <button onClick={this.rejectChange}>Reject</button></p>
+      </div>
+    );
   }
 }
 
