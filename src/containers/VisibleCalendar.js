@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { editEventDescription, moveEventUp, moveEventDown, deleteEvent } from '../actions'
+import { editEventDescription, moveEventUp, moveEventDown, addEvent, deleteEvent } from '../actions'
 import Calendar from '../components/Calendar'
 
 const mapStateToProps = state => {
@@ -18,6 +18,9 @@ const mapDispatchToProps = dispatch => {
     },
     onEventMovedDown: (date, eventIdx) => {
       dispatch(moveEventDown(date, eventIdx))
+    },
+    onEventAdded: (date, text) => {
+      dispatch(addEvent(date, text))
     },
     onEventDeleted: (date, eventIdx) => {
       dispatch(deleteEvent(date, eventIdx))

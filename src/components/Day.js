@@ -1,14 +1,19 @@
-import React from 'react';
-import './Day.css';
-import Event from './Event.js';
+import React from 'react'
+import './Day.css'
+import EditEvent from './EditEvent.js'
+import Event from './Event.js'
 
 class Day extends React.Component {
   constructor(props) {
-    super(props);
-    this.onEventDescriptionChanged = this.onEventDescriptionChanged.bind(this);
-    this.onEventMovedUp = this.onEventMovedUp.bind(this);
-    this.onEventMovedDown = this.onEventMovedDown.bind(this);
-    this.onEventDeleted = this.onEventDeleted.bind(this);
+    super(props)
+    this.state = {mode: 'view'}
+    this.onEventDescriptionChanged = this.onEventDescriptionChanged.bind(this)
+    this.onEventMovedUp = this.onEventMovedUp.bind(this)
+    this.onEventMovedDown = this.onEventMovedDown.bind(this)
+    this.onEventDeleted = this.onEventDeleted.bind(this)
+    this.enterEventAddMode = this.enterEventAddMode.bind(this)
+    this.addNewEvent = this.addNewEvent.bind(this)
+    this.cancelAddingNewEvent = this.cancelAddingNewEvent.bind(this)
   }
 
   onEventDescriptionChanged(eventIdx, eventDescription) {
@@ -25,6 +30,19 @@ class Day extends React.Component {
 
   onEventDeleted(eventIdx) {
   	this.props.onEventDeleted(this.props.date, eventIdx);
+  }
+
+  enterEventAddMode() {
+    this.setState({mode: 'addNewEvent'})
+  }
+
+  addNewEvent(text) {
+    this.props.onEventAdded(this.props.date, text)
+    this.setState({mode: 'view'})
+  }
+
+  cancelAddingNewEvent() {
+    this.setState({mode: 'view'})
   }
 
   renderEvent(event, idx) {
@@ -51,6 +69,8 @@ class Day extends React.Component {
         </div>
         <div className="dayContents">
           {events}
+          { this.state.mode === 'view' && <button onClick={this.enterEventAddMode}>+</button>}
+          { this.state.mode === 'addNewEvent' && <EditEvent text="" onAccepted={this.addNewEvent} onCancelled={this.cancelAddingNewEvent}/> }
         </div>
       </div>
     );

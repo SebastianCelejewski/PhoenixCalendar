@@ -1,5 +1,9 @@
 import { combineReducers } from 'redux'
-import { EDIT_EVENT_DESCRIPTION, MOVE_EVENT_UP, MOVE_EVENT_DOWN, DELETE_EVENT } from './actions'
+import { EDIT_EVENT_DESCRIPTION,
+         MOVE_EVENT_UP,
+         MOVE_EVENT_DOWN,
+         ADD_EVENT,
+         DELETE_EVENT } from './actions'
 
 const initialCalendar = [
         {
@@ -20,6 +24,11 @@ const initialCalendar = [
         {
           dayOfWeek: 'Wednesday',
           date: '2019-12-13',
+          events: []
+        },
+        {
+          dayOfWeek: 'Thursday',
+          date: '2019-12-14',
           events: [
             "Event 4.",
             "Event 5.",
@@ -27,6 +36,24 @@ const initialCalendar = [
           ]
         }
       ]
+
+function calendar(state = initialCalendar, action) {
+  console.log("Handling event " + action.type)
+  switch (action.type) {
+    case EDIT_EVENT_DESCRIPTION:
+      return editEventDescription(action, state)
+    case MOVE_EVENT_UP:
+      return moveEventUp(action, state)
+    case MOVE_EVENT_DOWN:
+      return moveEventDown(action, state)
+    case ADD_EVENT:
+      return addEvent(action, state)
+    case DELETE_EVENT:
+      return deleteEvent(action, state)
+    default:
+      return state
+  }
+}
 
 function editEventDescription(action, state) {
   var newState = state.map((day) => {
@@ -85,24 +112,22 @@ function moveEventDown(action, state) {
   return newState
 }
 
-function deleteEvent(action, state) {
-  return state
+function addEvent(action, state) {
+  var newState = state.map((day) => {
+    if (day.date === action.date) {
+      var newDay = Object.assign({}, day)
+      newDay.events.push(action.text)
+      return newDay
+    } else {
+      return day
+    }
+  })
+
+  return newState
 }
 
-function calendar(state = initialCalendar, action) {
-  console.log("Handling event " + action.type)
-  switch (action.type) {
-    case EDIT_EVENT_DESCRIPTION:
-      return editEventDescription(action, state)
-    case MOVE_EVENT_UP:
-      return moveEventUp(action, state)
-    case MOVE_EVENT_DOWN:
-      return moveEventDown(action, state)
-    case DELETE_EVENT:
-      return deleteEvent(action, state)
-  	default:
-  	  return state
-  }
+function deleteEvent(action, state) {
+  return state
 }
 
 const appReducers = combineReducers({
