@@ -127,7 +127,17 @@ function addEvent(action, state) {
 }
 
 function deleteEvent(action, state) {
-  return state
+var newState = state.map((day) => {
+    if (day.date === action.date) {
+      var newDay = Object.assign({}, day)
+      newDay.events.splice(action.eventIdx, 1)
+      return newDay
+    } else {
+      return day
+    }
+  })
+
+  return newState
 }
 
 const appReducers = combineReducers({
