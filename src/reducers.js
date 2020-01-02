@@ -56,88 +56,56 @@ function calendar(state = initialCalendar, action) {
 }
 
 function editEventDescription(action, state) {
-  var newState = state.map((day) => {
+  return [].concat(state).map((day) => {
     if (day.date === action.date) {
-      return Object.assign({}, day, {events: day.events.map((event, idx) => {
-        if (idx === action.eventIdx) {
-          return action.eventDescription
-        }
-        return event
-      })})
-    } else {
-      return day
+      day.events[action.eventIdx] = action.eventDescription
     }
+    return day
   })
-
-  return newState
 }
 
 function moveEventUp(action, state) {
-  var newState = state.map((day) => {
+  return [].concat(state).map((day) => {
     if (day.date === action.date) {
-      var dayEvents = day.events
-      var movedEventIdx = action.eventIdx
-      if (movedEventIdx > 0) {
-        console.log("Moving event " + movedEventIdx + " up")
-        var tempEvent = dayEvents[movedEventIdx-1]
-        dayEvents[movedEventIdx-1] = dayEvents[movedEventIdx]
-        dayEvents[movedEventIdx] = tempEvent
+      if (action.eventIdx > 0) {        
+        var tempEvent = day.events[action.eventIdx-1]
+        day.events[action.eventIdx-1] = day.events[action.eventIdx]
+        day.events[action.eventIdx] = tempEvent
       }
-      return Object.assign({}, day, {events: dayEvents})
-    } else {
-      return day
     }
+    return day
   })
-
-  return newState
 }
 
 function moveEventDown(action, state) {
-  var newState = state.map((day) => {
+  return [].concat(state).map((day) => {
     if (day.date === action.date) {
-      var dayEvents = day.events
-      var movedEventIdx = action.eventIdx
-      if (movedEventIdx < dayEvents.length - 1) {
-        console.log("Moving event " + movedEventIdx + " down")
-        var tempEvent = dayEvents[movedEventIdx+1]
-        dayEvents[movedEventIdx+1] = dayEvents[movedEventIdx]
-        dayEvents[movedEventIdx] = tempEvent
+      if (action.eventIdx < day.events.length - 1) {        
+        var tempEvent = day.events[action.eventIdx+1]
+        day.events[action.eventIdx+1] = day.events[action.eventIdx]
+        day.events[action.eventIdx] = tempEvent
       }
-      return Object.assign({}, day, dayEvents)
-    } else {
-      return day
     }
+    return day
   })
-
-  return newState
 }
 
 function addEvent(action, state) {
-  var newState = state.map((day) => {
+  return [].concat(state).map((day) => {
     if (day.date === action.date) {
-      var newDay = Object.assign({}, day)
-      newDay.events.push(action.text)
-      return newDay
-    } else {
-      return day
+      day.events.push(action.text)
     }
+    return day
   })
-
-  return newState
 }
 
 function deleteEvent(action, state) {
-var newState = state.map((day) => {
+  return [].concat(state).map((day) => {
     if (day.date === action.date) {
-      var newDay = Object.assign({}, day)
-      newDay.events.splice(action.eventIdx, 1)
-      return newDay
-    } else {
-      return day
+      day.events.splice(action.eventIdx, 1)
     }
+    return day
   })
-
-  return newState
 }
 
 const appReducers = combineReducers({
