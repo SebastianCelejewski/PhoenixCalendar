@@ -65,12 +65,17 @@ function editEventDescription(action, state) {
 }
 
 function moveEventUp(action, state) {
-  return [].concat(state).map((day) => {
+  return [].concat(state).map((day, index, array) => {
     if (day.date === action.date) {
       if (action.eventIdx > 0) {        
         var tempEvent = day.events[action.eventIdx-1]
         day.events[action.eventIdx-1] = day.events[action.eventIdx]
         day.events[action.eventIdx] = tempEvent
+      } else {
+        if (index > 1) {
+          array[index-1].events.push(day.events[action.eventIdx])
+          day.events.splice(action.eventIdx, 1)
+        }
       }
     }
     return day
@@ -78,12 +83,17 @@ function moveEventUp(action, state) {
 }
 
 function moveEventDown(action, state) {
-  return [].concat(state).map((day) => {
+  return [].concat(state).map((day, index, array) => {
     if (day.date === action.date) {
       if (action.eventIdx < day.events.length - 1) {        
         var tempEvent = day.events[action.eventIdx+1]
         day.events[action.eventIdx+1] = day.events[action.eventIdx]
         day.events[action.eventIdx] = tempEvent
+      } else {
+        if (index < array.length - 1) {
+          array[index+1].events.unshift(day.events[action.eventIdx])
+          day.events.splice(action.eventIdx, 1)
+        }
       }
     }
     return day
