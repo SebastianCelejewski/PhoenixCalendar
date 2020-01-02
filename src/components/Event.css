@@ -13,3 +13,12 @@
 p, textarea {
 	margin:0;
 }
+
+button.control {
+  font-size: 6px;
+  width: 12px;
+  height: 12px;
+  margin: 0px 2px 0px 0px;
+  padding: 0px;
+  vertical-align: middle;
+}

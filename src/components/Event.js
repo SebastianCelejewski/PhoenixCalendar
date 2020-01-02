@@ -52,9 +52,9 @@ class Event extends React.Component {
       <div className="event" >
         <span onClick={this.enterEditMode}>{this.props.description}</span>
         <span className="eventControls">
-          <button onClick={this.moveEventUp}>&uarr;</button>
-          <button onClick={this.moveEventDown}>&darr;</button>
-          <button onClick={this.deleteEvent}>X</button>
+          <button className="control" onClick={this.moveEventUp}>&uarr;</button>
+          <button className="control" onClick={this.moveEventDown}>&darr;</button>
+          <button className="control" onClick={this.deleteEvent}>X</button>
         </span>
       </div>
     );

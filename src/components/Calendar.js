@@ -47,7 +47,14 @@ class Calendar extends React.Component {
   }
 
   render() {
-    return this.props.calendar.map( (day) => this.renderDay(day) )
+    var days = this.props.calendar.map( (day) => this.renderDay(day) )
+    return (
+      <table>
+        <tbody>
+          {days}
+        </tbody>
+      </table>
+    )
   }
 }
 

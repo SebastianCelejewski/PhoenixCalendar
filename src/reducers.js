@@ -7,7 +7,7 @@ import { EDIT_EVENT_DESCRIPTION,
 
 const initialCalendar = [
         {
-          dayOfWeek: 'Monday',
+          dayOfWeek: 'mo',
           date: '2019-12-11',
           events: [
             "Event 1",
@@ -15,19 +15,19 @@ const initialCalendar = [
           ]
         },
         {
-          dayOfWeek: 'Tuesday',
+          dayOfWeek: 'tu',
           date: '2019-12-12',
           events: [
             "Event 3."
           ]
         },
         {
-          dayOfWeek: 'Wednesday',
+          dayOfWeek: 'we',
           date: '2019-12-13',
           events: []
         },
         {
-          dayOfWeek: 'Thursday',
+          dayOfWeek: 'th',
           date: '2019-12-14',
           events: [
             "Event 4.",

@@ -3,17 +3,7 @@
 	margin: 1px;
 	clear: both;
 	text-align: left;
-}
-
-.dayHeader {
-	margin-top: 4px;
-	margin-right: 4px;
-	padding-left: 4px;
-	padding-right: 4px;
-	background-color: #e0e0e0;
-	display: inline-block;
 	vertical-align: top;
-	text-align: right;
 }
 
 .dayOfWeek {
@@ -30,4 +20,13 @@
 	margin-left: 2px;
 	display: inline-block;
 	width: 80vw;
+}
+
+button.control {
+  font-size: 6px;
+  width: 12px;
+  height: 12px;
+  margin: 0px 2px 0px 0px;
+  padding: 0px;
+  vertical-align: middle;
 }

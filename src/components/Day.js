@@ -62,17 +62,15 @@ class Day extends React.Component {
   render() {
     var events = this.props.events.map( (event, idx) => this.renderEvent(event, idx));
     return (
-      <div className="day">
-        <div className="dayHeader">
-          <p className="dayOfWeek">{this.props.dayOfWeek}</p>
-          <p className="date">{this.props.date}</p>
-        </div>
-        <div className="dayContents">
+      <tr className="day">
+        <td className="date">{this.props.date}</td>
+        <td className="dayOfWeek">{this.props.dayOfWeek}</td>
+        <td className="dayContents">
           {events}
-          { this.state.mode === 'view' && <button onClick={this.enterEventAddMode}>+</button>}
+          { this.state.mode === 'view' && <button className="control" onClick={this.enterEventAddMode}>+</button>}
           { this.state.mode === 'addNewEvent' && <EditEvent text="" onAccepted={this.addNewEvent} onCancelled={this.cancelAddingNewEvent}/> }
-        </div>
-      </div>
+        </td>
+      </tr>
     );
   }
 }
