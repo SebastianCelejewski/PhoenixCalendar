@@ -4,6 +4,7 @@ import { EDIT_EVENT_DESCRIPTION,
          MOVE_EVENT_DOWN,
          ADD_EVENT,
          DELETE_EVENT } from './actions'
+import { date2string, string2date, date2dayOfWeek, addDays } from './dateUtils'
 
 const initialCalendar = [
         {
@@ -37,7 +38,37 @@ const initialCalendar = [
         }
       ]
 
-function calendar(state = initialCalendar, action) {
+function expandCalendarToDefaultTimeRange(calendar) {
+  var startDate = addDays(new Date(), -7)
+  var endDate = addDays(new Date(), 3 * 7)
+
+  var calendarStartDate = string2date(calendar[0].date)
+  var calendarEndDate = string2date(calendar[calendar.length-1].date)
+
+  var date = startDate
+  while (date < calendarStartDate) {
+    calendar.unshift(createNewDay(date))
+    addDays(date, 1)
+  }
+
+  date.setTime(calendarEndDate.getTime() + 1 * 24 * 3600 * 1000)
+  while (date <= endDate) {
+    calendar.push(createNewDay(date))
+    addDays(date, 1)
+  }
+
+  return calendar
+}
+
+function createNewDay(date) {
+  return {
+    date: date2string(date),
+    dayOfWeek: date2dayOfWeek(date),
+    events: []
+  }
+}
+
+function calendar(state = expandCalendarToDefaultTimeRange(initialCalendar), action) {
   console.log("Handling event " + action.type)
   switch (action.type) {
     case EDIT_EVENT_DESCRIPTION:
