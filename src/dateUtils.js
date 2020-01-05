@@ -17,3 +17,10 @@ export function addDays(date, numberOfDays) {
   date.setTime(date.getTime() + numberOfDays * 24 * 3600 * 1000)
   return date
 }
+
+export function cloneDate(date, offset = 0) {
+  var newDate = new Date()
+  newDate.setTime(date.getTime())
+  addDays(newDate, offset)
+  return newDate
+}

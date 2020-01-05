@@ -10,6 +10,8 @@ class Calendar extends React.Component {
     this.onEventMovedDown = this.onEventMovedDown.bind(this)
     this.onEventDeleted = this.onEventDeleted.bind(this)
     this.onEventAdded = this.onEventAdded.bind(this)
+    this.onAddedWeekBefore = this.onAddedWeekBefore.bind(this)
+    this.onAddedWeekAfter = this.onAddedWeekAfter.bind(this)
   }
 
   onEventDescriptionChanged(date, eventIdx, eventDescription) {
@@ -32,6 +34,14 @@ class Calendar extends React.Component {
     this.props.onEventDeleted(date, eventIdx)
   }
 
+  onAddedWeekBefore() {
+    this.props.onAddedWeekBefore()
+  }
+
+  onAddedWeekAfter() {
+    this.props.onAddedWeekAfter()
+  }
+
   renderDay(day) {
     return (<Day
       key={day.date}
@@ -49,11 +59,15 @@ class Calendar extends React.Component {
   render() {
     var days = this.props.calendar.map( (day) => this.renderDay(day) )
     return (
+      <React.Fragment>
+      <button onClick={this.onAddedWeekBefore}>Add week before</button>
       <table>
         <tbody>
           {days}
         </tbody>
       </table>
+      <button onClick={this.onAddedWeekAfter}>Add week after</button>
+      </React.Fragment>
     )
   }
 }

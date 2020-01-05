@@ -3,13 +3,15 @@ import { EDIT_EVENT_DESCRIPTION,
          MOVE_EVENT_UP,
          MOVE_EVENT_DOWN,
          ADD_EVENT,
-         DELETE_EVENT } from './actions'
-import { date2string, string2date, date2dayOfWeek, addDays } from './dateUtils'
+         DELETE_EVENT,
+         ADD_WEEK_BEFORE,
+         ADD_WEEK_AFTER } from './actions'
+import { date2string, string2date, date2dayOfWeek, cloneDate, addDays } from './dateUtils'
 
 const initialCalendar = [
         {
           dayOfWeek: 'mo',
-          date: '2019-12-11',
+          date: '2020-01-11',
           events: [
             "Event 1",
             "Event 2."
@@ -17,19 +19,19 @@ const initialCalendar = [
         },
         {
           dayOfWeek: 'tu',
-          date: '2019-12-12',
+          date: '2020-01-12',
           events: [
             "Event 3."
           ]
         },
         {
           dayOfWeek: 'we',
-          date: '2019-12-13',
+          date: '2020-01-13',
           events: []
         },
         {
           dayOfWeek: 'th',
-          date: '2019-12-14',
+          date: '2020-01-14',
           events: [
             "Event 4.",
             "Event 5.",
@@ -39,19 +41,19 @@ const initialCalendar = [
       ]
 
 function expandCalendarToDefaultTimeRange(calendar) {
-  var startDate = addDays(new Date(), -7)
-  var endDate = addDays(new Date(), 3 * 7)
+  var startDate = cloneDate(new Date(), -7)
+  var endDate = cloneDate(new Date(), 3 * 7)
 
   var calendarStartDate = string2date(calendar[0].date)
   var calendarEndDate = string2date(calendar[calendar.length-1].date)
 
-  var date = startDate
-  while (date < calendarStartDate) {
+  var date = cloneDate(calendarStartDate, -1)
+  while (date > startDate) {
     calendar.unshift(createNewDay(date))
-    addDays(date, 1)
+    addDays(date, -1)
   }
 
-  date.setTime(calendarEndDate.getTime() + 1 * 24 * 3600 * 1000)
+  date = cloneDate(calendarEndDate, 1)
   while (date <= endDate) {
     calendar.push(createNewDay(date))
     addDays(date, 1)
@@ -81,6 +83,10 @@ function calendar(state = expandCalendarToDefaultTimeRange(initialCalendar), act
       return addEvent(action, state)
     case DELETE_EVENT:
       return deleteEvent(action, state)
+    case ADD_WEEK_BEFORE:
+      return addWeekBefore(action, state)
+    case ADD_WEEK_AFTER:
+      return addWeekAfter(action, state)
     default:
       return state
   }
@@ -147,6 +153,34 @@ function deleteEvent(action, state) {
     }
     return day
   })
+}
+
+function addWeekBefore(action, state) {
+  var calendarCurrentStartDate = string2date(state[0].date)
+  var calendarNewStartDate = cloneDate(calendarCurrentStartDate, -7)
+  var date = cloneDate(calendarCurrentStartDate, -1)
+
+  var newState = [].concat(state)
+  while (date >= calendarNewStartDate) {
+    newState.unshift(createNewDay(date))
+    addDays(date, -1)    
+  }
+
+  return newState
+}
+
+function addWeekAfter(action, state) {
+  var calendarCurrentEndDate = string2date(state[state.length - 1].date)
+  var calendarNewEndDate = cloneDate(calendarCurrentEndDate, 7)
+  var date = cloneDate(calendarCurrentEndDate, 1)
+
+  var newState = [].concat(state)
+  while (date <= calendarNewEndDate) {
+    newState.push(createNewDay(date))
+    addDays(date, 1)
+  }
+
+  return newState
 }
 
 const appReducers = combineReducers({
